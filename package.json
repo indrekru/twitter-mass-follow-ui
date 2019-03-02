@@ -8,13 +8,15 @@
     "react-scripts": "2.1.5",
     "bootstrap": "git+https://github.com/transferwise/bootstrap.git#v5.18.10",
     "chart.js": "git+https://github.com/chartjs/Chart.js.git#v2.7.3",
-    "react-chartjs-2": "^2.7.4"
+    "react-chartjs-2": "^2.7.4",
+    "release-it": "^10.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "release-it"
   },
   "eslintConfig": {
     "extends": "react-app"
