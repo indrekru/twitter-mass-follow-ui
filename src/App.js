@@ -1,28 +1,68 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { PureComponent } from 'react';
+import { Line } from 'react-chartjs-2';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+class App extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            followers: {}
+        };
+    }
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    fetchData() {
+        fetch('https://mass-follower1.herokuapp.com/api/v1/follow-stats', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+        }).then((resp) => resp.json())
+        .then((data) => {
+            this.setState({
+                followers: this.transformData(data)
+            });
+        });
+    }
+
+    transformData(data) {
+        let out = {
+            labels      : [],
+            datasets    : [{
+                label   : 'Followers',
+                data    : []
+            }]
+        };
+        data.forEach((item) => {
+            out.labels.push(new Date(item.created).toLocaleString());
+            out.datasets[0].data.push(item.following);
+        });
+        return out;
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">
+                                    Followers
+                                </h3>
+                            </div>
+                            <div className="panel-body">
+                                <Line data={this.state.followers} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
