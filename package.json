@@ -18,6 +18,11 @@
     "eject": "react-scripts eject",
     "release": "release-it"
   },
+  "release-it": {
+    "github": {
+      "release": true
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
