@@ -33,11 +33,12 @@ Button.propTypes = {
     loadingText: PropTypes.string.isRequired,
     icon: PropTypes.string,
     onClick: PropTypes.func.isRequired,
-    className: PropTypes.string.isRequired
+    className: PropTypes.string
 }
 
 Button.defaultProps = {
-    icon: null
+    icon: null,
+    className: null
 }
 
 export default Button;
