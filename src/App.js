@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -53,6 +54,7 @@ class App extends PureComponent {
                                 <h3 className="panel-title">
                                     Followers
                                 </h3>
+                                <p>The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank">{this.props.homeAccount}</a> account at given times.</p>
                             </div>
                             <div className="panel-body">
                                 <Line data={this.state.followers} />
@@ -63,6 +65,14 @@ class App extends PureComponent {
             </div>
         );
     }
+}
+
+App.propTypes = {
+    homeAccount: PropTypes.string,
+}
+
+App.defaultProps = {
+    homeAccount: 'freenancefeed'
 }
 
 export default App;
