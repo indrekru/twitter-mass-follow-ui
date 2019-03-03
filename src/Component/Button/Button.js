@@ -6,7 +6,7 @@ class Button extends PureComponent {
     render() {
         return (
             <button
-                className="btn btn-primary btn-sm"
+                className={classnames('btn btn-primary btn-sm', this.props.className)}
                 onClick={this.props.onClick}
                 disabled={this.props.loading}
             >
@@ -32,7 +32,8 @@ Button.propTypes = {
     text: PropTypes.string.isRequired,
     loadingText: PropTypes.string.isRequired,
     icon: PropTypes.string,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired
 }
 
 Button.defaultProps = {

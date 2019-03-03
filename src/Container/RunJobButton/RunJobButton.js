@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../Component/Button';
 
 class RunJobButton extends PureComponent {
@@ -50,9 +51,18 @@ class RunJobButton extends PureComponent {
                 loadingText="Running..."
                 icon="icon-setting"
                 onClick={this.triggerJob}
+                className={this.props.className}
             />
         );
     }
+}
+
+RunJobButton.propTypes = {
+    className: PropTypes.string,
+}
+
+RunJobButton.defaultProps = {
+    className: null
 }
 
 export default RunJobButton;

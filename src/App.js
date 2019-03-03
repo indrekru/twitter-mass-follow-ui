@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import RunJobButton from './Container/RunJobButton';
+import './style.css';
 
 class App extends PureComponent {
     constructor(props) {
@@ -47,13 +48,17 @@ class App extends PureComponent {
                 <div className="row">
                     <div className="col-xs-12">
                         <div className="panel panel-default">
-                            <div className="panel-heading">
+                            <div className="panel-body p-b-0 p-t-2 bg-primary">
                                 <h3 className="panel-title">
                                     Followers
                                     &nbsp;&nbsp;
-                                    <RunJobButton />
                                 </h3>
-                                <p>The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.</p>
+                                <p className="m-b-2">
+                                    The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.
+                                </p>
+                                <RunJobButton
+                                    className="m-b-3"
+                                />
                             </div>
                             <div className="panel-body">
                                 {this.state.followers.length &&
