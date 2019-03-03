@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Line } from 'react-chartjs-2';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import RunJobButton from './Container/RunJobButton';
 
@@ -9,7 +9,7 @@ class App extends PureComponent {
         super(props);
 
         this.state = {
-            followers: {}
+            followers: []
         };
     }
     componentDidMount() {
@@ -31,16 +31,12 @@ class App extends PureComponent {
     }
 
     transformData(data) {
-        let out = {
-            labels      : [],
-            datasets    : [{
-                label   : 'Followers',
-                data    : []
-            }]
-        };
+        let out = [];
         data.forEach((item) => {
-            out.labels.push(new Date(item.created).toLocaleString());
-            out.datasets[0].data.push(item.following);
+            out.push({
+                name: new Date(item.created).toLocaleString(),
+                Followers: item.following
+            });
         });
         return out;
     }
@@ -60,7 +56,20 @@ class App extends PureComponent {
                                 <p>The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.</p>
                             </div>
                             <div className="panel-body">
-                                <Line data={this.state.followers} />
+                                {this.state.followers.length &&
+                                    <ResponsiveContainer width='100%' height={300}>
+                                    <LineChart
+                                        data={this.state.followers}
+                                    >
+                                        <CartesianGrid strokeDasharray="5 5"  />
+                                        <XAxis dataKey="name" />
+                                        <YAxis domain={['auto', 'auto']} />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Line type="monotone" dataKey="Followers" stroke="#00b9ff" />
+                                    </LineChart>
+                                    </ResponsiveContainer>
+                                }
                             </div>
                         </div>
                     </div>
