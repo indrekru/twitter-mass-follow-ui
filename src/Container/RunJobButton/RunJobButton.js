@@ -7,7 +7,7 @@ class RunJobButton extends PureComponent {
         super(props);
 
         this.state = {
-            loading: true
+            loading: false
         };
         this.triggerJob = this.triggerJob.bind(this);
     }
