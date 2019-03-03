@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import RunJobButton from './Container/RunJobButton';
 
 class App extends PureComponent {
     constructor(props) {
@@ -53,8 +54,10 @@ class App extends PureComponent {
                             <div className="panel-heading">
                                 <h3 className="panel-title">
                                     Followers
+                                    &nbsp;&nbsp;
+                                    <RunJobButton />
                                 </h3>
-                                <p>The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank">{this.props.homeAccount}</a> account at given times.</p>
+                                <p>The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.</p>
                             </div>
                             <div className="panel-body">
                                 <Line data={this.state.followers} />
