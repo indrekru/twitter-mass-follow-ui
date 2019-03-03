@@ -12,12 +12,16 @@ class RunJobButton extends PureComponent {
         this.triggerJob = this.triggerJob.bind(this);
     }
 
+    setRunningState(running) {
+        this.setState({
+            loading: running
+        });
+    }
+
     componentDidMount() {
-        this.statusTimer = setInterval(() => this.checkJobStatus().then((running) => {
-            this.setState({
-                loading: running
-            });
-        }), 5000);
+        this.checkJobStatus().then((running) => this.setRunningState(running));
+        this.statusTimer = setInterval(() => this.checkJobStatus()
+            .then((running) => this.setRunningState(running)), 5000);
     }
 
     componentWillUnmount() {
@@ -36,11 +40,8 @@ class RunJobButton extends PureComponent {
     triggerJob() {
         fetch('https://mass-follower1.herokuapp.com/api/v1/trigger', {
             method: 'POST'
-        }).then(() => this.checkJobStatus().then((running) => {
-            this.setState({
-                loading: running
-            });
-        }));
+        }).then(() => this.checkJobStatus()
+            .then((running) => this.setRunningState(running)));
     }
 
     render() {
