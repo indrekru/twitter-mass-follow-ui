@@ -51,7 +51,6 @@ class App extends PureComponent {
                             <div className="panel-body p-b-0 p-t-2 bg-primary">
                                 <h3 className="panel-title">
                                     Followers
-                                    &nbsp;&nbsp;
                                 </h3>
                                 <p className="m-b-2">
                                     The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.
