@@ -29,7 +29,7 @@ class RunJobButton extends PureComponent {
     }
 
     checkJobStatus() {
-        return fetch('https://mass-follower1.herokuapp.com/api/v1/job-status', {
+        return fetch(`${this.props.apiUrl}/api/v1/job-status`, {
             method: 'GET'
         }).then((resp) => resp.json())
         .then((data) => {
@@ -38,7 +38,7 @@ class RunJobButton extends PureComponent {
     }
 
     triggerJob() {
-        fetch('https://mass-follower1.herokuapp.com/api/v1/trigger', {
+        fetch(`${this.props.apiUrl}/api/v1/trigger`, {
             method: 'POST'
         }).then(() => this.checkJobStatus()
             .then((running) => this.setRunningState(running)));
@@ -60,6 +60,7 @@ class RunJobButton extends PureComponent {
 
 RunJobButton.propTypes = {
     className: PropTypes.string,
+    apiUrl: PropTypes.string.isRequired
 }
 
 RunJobButton.defaultProps = {

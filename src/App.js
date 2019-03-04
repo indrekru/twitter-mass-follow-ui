@@ -27,7 +27,7 @@ class App extends PureComponent {
     }
 
     fetchData() {
-        fetch('https://mass-follower1.herokuapp.com/api/v1/follow-stats', {
+        fetch(`${this.props.apiUrl}/api/v1/follow-stats`, {
             method: 'GET',
         }).then((resp) => resp.json())
         .then((data) => {
@@ -53,7 +53,7 @@ class App extends PureComponent {
         this.setState({
             updatingFollowers: true
         });
-        fetch('https://mass-follower1.herokuapp.com/api/v1/update-followers', {
+        fetch(`${this.props.apiUrl}/api/v1/update-followers`, {
             method: 'POST'
         }).then((resp) => {
             this.setState({
@@ -78,6 +78,7 @@ class App extends PureComponent {
                                 <div className="btn-group">
                                     <RunJobButton
                                         className="m-b-3"
+                                        apiUrl={this.props.apiUrl}
                                     />
                                     <Button
                                         loading={this.state.updatingFollowers}
@@ -114,10 +115,12 @@ class App extends PureComponent {
 
 App.propTypes = {
     homeAccount: PropTypes.string,
+    apiUrl: PropTypes.string
 }
 
 App.defaultProps = {
-    homeAccount: 'freenancefeed'
+    homeAccount: 'freenancefeed',
+    apiUrl: 'https://mass-follower1.herokuapp.com'
 }
 
 export default App;
