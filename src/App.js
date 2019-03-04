@@ -42,7 +42,7 @@ class App extends PureComponent {
         data.forEach((item) => {
             out.push({
                 name: new Date(item.created).toLocaleString(),
-                Followers: item.following
+                Followers: item.myFollowers
             });
         });
         return out;
