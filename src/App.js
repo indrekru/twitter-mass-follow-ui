@@ -42,7 +42,8 @@ class App extends PureComponent {
         data.forEach((item) => {
             out.push({
                 name: new Date(item.created).toLocaleString(),
-                Followers: item.myFollowers
+                Followers: item.myFollowers,
+                Following: item.imFollowing
             });
         });
         return out;
@@ -98,6 +99,7 @@ class App extends PureComponent {
                                         <Tooltip />
                                         <Legend />
                                         <Line type="monotone" dataKey="Followers" stroke="#00b9ff" />
+                                        <Line type="monotone" dataKey="Following" stroke="#2ED06E" />
                                     </LineChart>
                                     </ResponsiveContainer>
                                 }
