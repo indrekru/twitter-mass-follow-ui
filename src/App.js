@@ -75,18 +75,18 @@ class App extends PureComponent {
                                 <p className="m-b-2">
                                     The total amount of followers on some account at given times.
                                 </p>
-                                <div className="btn-group">
-                                    <RunJobButton
-                                        className="m-b-3"
-                                        apiUrl={this.props.apiUrl}
-                                    />
-                                    <Button
-                                        loading={this.state.updatingFollowers}
-                                        text="Update followers"
-                                        loadingText="Updating..."
-                                        onClick={this.handleUpdateFollowers}
-                                    />
-                                </div>
+//                                <div className="btn-group">
+//                                    <RunJobButton
+//                                        className="m-b-3"
+//                                        apiUrl={this.props.apiUrl}
+//                                    />
+//                                    <Button
+//                                        loading={this.state.updatingFollowers}
+//                                        text="Update followers"
+//                                        loadingText="Updating..."
+//                                        onClick={this.handleUpdateFollowers}
+//                                    />
+//                                </div>
                             </div>
                             <div className="panel-body">
                                 {this.state.followers.length &&
