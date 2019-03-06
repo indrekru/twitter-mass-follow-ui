@@ -73,7 +73,7 @@ class App extends PureComponent {
                                     Followers
                                 </h3>
                                 <p className="m-b-2">
-                                    The total amount of followers on <a href={'https://twitter.com/' + this.props.homeAccount} target="_blank" rel="noopener noreferrer">{this.props.homeAccount}</a> account at given times.
+                                    The total amount of followers on some account at given times.
                                 </p>
                                 <div className="btn-group">
                                     <RunJobButton
@@ -114,12 +114,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-    homeAccount: PropTypes.string,
     apiUrl: PropTypes.string
 }
 
 App.defaultProps = {
-    homeAccount: 'freenancefeed',
     apiUrl: 'https://mass-follower1.herokuapp.com'
 }
 
