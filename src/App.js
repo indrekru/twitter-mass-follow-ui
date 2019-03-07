@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import RunJobButton from './Container/RunJobButton';
-import Button from './Component/Button';
+import UpdateFollowersButton from './Container/UpdateFollowersButton';
 import './style.css';
 
 class App extends PureComponent {
@@ -14,8 +14,6 @@ class App extends PureComponent {
             followers: [],
             updatingFollowers: false
         };
-
-        this.handleUpdateFollowers = this.handleUpdateFollowers.bind(this);
     }
     componentDidMount() {
         this.fetchData();
@@ -49,19 +47,6 @@ class App extends PureComponent {
         return out;
     }
 
-    handleUpdateFollowers() {
-        this.setState({
-            updatingFollowers: true
-        });
-        fetch(`${this.props.apiUrl}/api/v1/update-followers`, {
-            method: 'POST'
-        }).then((resp) => {
-            this.setState({
-                updatingFollowers: false
-            });
-        });
-    }
-
     render() {
         return (
             <div className="container">
@@ -75,20 +60,15 @@ class App extends PureComponent {
                                 <p className="m-b-2">
                                     The total amount of followers on some account at given times.
                                 </p>
-                                {/*
                                 <div className="btn-group">
                                     <RunJobButton
                                         className="m-b-3"
                                         apiUrl={this.props.apiUrl}
                                     />
-                                    <Button
-                                        loading={this.state.updatingFollowers}
-                                        text="Update followers"
-                                        loadingText="Updating..."
-                                        onClick={this.handleUpdateFollowers}
+                                    <UpdateFollowersButton
+                                        apiUrl={this.props.apiUrl}
                                     />
                                 </div>
-                                */}
                             </div>
                             <div className="panel-body">
                                 {this.state.followers.length &&
