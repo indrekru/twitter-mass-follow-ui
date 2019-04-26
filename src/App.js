@@ -100,7 +100,7 @@ App.propTypes = {
 }
 
 App.defaultProps = {
-    apiUrl: 'https://mass-follower.herokuapp.com'
+    apiUrl: 'https://mass-follower1.herokuapp.com'
 }
 
 export default App;
