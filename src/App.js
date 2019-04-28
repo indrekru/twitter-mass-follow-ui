@@ -12,8 +12,11 @@ class App extends PureComponent {
 
         this.state = {
             followers: [],
-            updatingFollowers: false
+            updatingFollowers: false,
+            apiUrl: props.apiUrl
         };
+
+        this.onSourceChange = this.onSourceChange.bind(this);
     }
     componentDidMount() {
         this.fetchData();
@@ -25,7 +28,7 @@ class App extends PureComponent {
     }
 
     fetchData() {
-        fetch(`${this.props.apiUrl}/api/v1/follow-stats`, {
+        fetch(`${this.state.apiUrl}/api/v1/follow-stats`, {
             method: 'GET',
         }).then((resp) => resp.json())
         .then((data) => {
@@ -47,6 +50,12 @@ class App extends PureComponent {
         return out;
     }
 
+    onSourceChange(event) {
+        this.setState({
+            apiUrl: event.target.value
+        });
+    }
+
     render() {
         return (
             <div className="container">
@@ -63,10 +72,19 @@ class App extends PureComponent {
                                 <div className="btn-group">
                                     <RunJobButton
                                         className="m-b-3"
-                                        apiUrl={this.props.apiUrl}
+                                        apiUrl={this.state.apiUrl}
                                     />
                                     <UpdateFollowersButton
-                                        apiUrl={this.props.apiUrl}
+                                        apiUrl={this.state.apiUrl}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        value={this.state.apiUrl}
+                                        onChange={this.onSourceChange}
+                                        className="form-control"
+                                        placeholder="API URL"
                                     />
                                 </div>
                             </div>
