@@ -4,7 +4,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import RunJobButton from './Container/RunJobButton';
 import UpdateFollowersButton from './Container/UpdateFollowersButton';
+import Button from './Component/Button';
 import './style.css';
+import classnames from 'classnames';
 
 class App extends PureComponent {
     constructor(props) {
@@ -50,9 +52,9 @@ class App extends PureComponent {
         return out;
     }
 
-    onSourceChange(event) {
+    onSourceChange(url) {
         this.setState({
-            apiUrl: event.target.value
+            apiUrl: url
         });
     }
 
@@ -78,9 +80,30 @@ class App extends PureComponent {
                                         apiUrl={this.state.apiUrl}
                                     />
                                 </div>
+                                <div className="row m-b-3">
+                                    <div className="col-xs-12">
+                                        <div className="btn-group">
+                                            <Button
+                                                text="Node 1"
+                                                loadingText="Loading..."
+                                                onClick={(e) => this.onSourceChange('https://mass-follower1.herokuapp.com')}
+                                                loading={false}
+                                                className={classnames({'active' : this.state.apiUrl === 'https://mass-follower1.herokuapp.com'})}
+                                             />
+                                             <Button
+                                                 text="Node 2"
+                                                 loadingText="Loading..."
+                                                 onClick={(e) => this.onSourceChange('https://mass-follower.herokuapp.com')}
+                                                 loading={false}
+                                                 className={classnames({'active' : this.state.apiUrl === 'https://mass-follower.herokuapp.com'})}
+                                              />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="form-group">
                                     <input
                                         type="text"
+                                        disabled={true}
                                         value={this.state.apiUrl}
                                         onChange={this.onSourceChange}
                                         className="form-control"
