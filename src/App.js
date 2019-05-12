@@ -95,7 +95,7 @@ class App extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row m-b-3">
+                                {/* <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="form-group form-group-sm m-b-0">
                                             <input
@@ -108,7 +108,7 @@ class App extends PureComponent {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="btn-group">
