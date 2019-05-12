@@ -66,10 +66,10 @@ class App extends PureComponent {
                         <div className="panel panel-default">
                             <div className="panel-body p-b-0 p-t-2 bg-primary">
                                 <h3 className="panel-title">
-                                    Followers
+                                    Twitter mass follower
                                 </h3>
                                 <p className="m-b-2">
-                                    The total amount of followers on some account at given times.
+                                    The amount of followers on some Twitter accounts
                                 </p>
                                 <div className="btn-group">
                                     <RunJobButton
