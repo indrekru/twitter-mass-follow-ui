@@ -28,9 +28,9 @@ class Button extends PureComponent {
 }
 
 Button.propTypes = {
-    loading: PropTypes.bool.isRequired,
+    loading: PropTypes.bool,
     text: PropTypes.string.isRequired,
-    loadingText: PropTypes.string.isRequired,
+    loadingText: PropTypes.string,
     icon: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     className: PropTypes.string
@@ -38,7 +38,9 @@ Button.propTypes = {
 
 Button.defaultProps = {
     icon: null,
-    className: null
+    className: null,
+    loading: false,
+    loadingText: 'Loading...',
 }
 
 export default Button;

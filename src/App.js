@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import RunJobButton from './Container/RunJobButton';
-import UpdateFollowersButton from './Container/UpdateFollowersButton';
+//import RunJobButton from './Container/RunJobButton';
+//import UpdateFollowersButton from './Container/UpdateFollowersButton';
 import Button from './Component/Button';
 import './style.css';
 import classnames from 'classnames';
@@ -12,29 +11,40 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.accounts = [
+            'https://mass-follower1.herokuapp.com',
+            'https://mass-follower.herokuapp.com'
+        ];
+
         this.state = {
             followers: [],
             updatingFollowers: false,
-            apiUrl: props.apiUrl
+            apiUrl: this.accounts[0],
+            loading: false
         };
 
         this.onSourceChange = this.onSourceChange.bind(this);
     }
     componentDidMount() {
-        this.fetchData();
-        this.timer = setInterval(() => this.fetchData(), 5000);
+        this.fetchData(this.state.apiUrl);
+        this.timer = setInterval(() => this.fetchData(this.state.apiUrl), 10000);
     }
 
     componentWillUnmount() {
         this.timer = null;
     }
 
-    fetchData() {
-        fetch(`${this.state.apiUrl}/api/v1/follow-stats`, {
+    fetchData(url) {
+        this.setState({
+            loading: true
+        });
+        fetch(`${url}/api/v1/follow-stats`, {
             method: 'GET',
         }).then((resp) => resp.json())
         .then((data) => {
             this.setState({
+                loading: false,
+                apiUrl: url,
                 followers: this.transformData(data)
             });
         });
@@ -53,12 +63,11 @@ class App extends PureComponent {
     }
 
     onSourceChange(url) {
-        this.setState({
-            apiUrl: url
-        });
+        this.fetchData(url);
     }
 
     render() {
+        const that = this;
         return (
             <div className="container">
                 <div className="row">
@@ -78,20 +87,16 @@ class App extends PureComponent {
                                 <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="btn-group">
-                                            <Button
-                                                text="Account 1"
-                                                loadingText="Loading..."
-                                                onClick={(e) => this.onSourceChange('https://mass-follower1.herokuapp.com')}
-                                                loading={false}
-                                                className={classnames({'active' : this.state.apiUrl === 'https://mass-follower1.herokuapp.com'})}
-                                             />
-                                             <Button
-                                                 text="Account 2"
-                                                 loadingText="Loading..."
-                                                 onClick={(e) => this.onSourceChange('https://mass-follower.herokuapp.com')}
-                                                 loading={false}
-                                                 className={classnames({'active' : this.state.apiUrl === 'https://mass-follower.herokuapp.com'})}
-                                              />
+                                            {this.accounts.map(function(accountUrl, index){
+                                                return <Button
+                                                            key={index}
+                                                            loading={that.state.loading}
+                                                            text={'Account ' + (index + 1)}
+                                                            onClick={(e) => that.onSourceChange(accountUrl)}
+                                                            className={classnames({'active' : that.state.apiUrl === accountUrl})}
+                                                        />;
+                                                })
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -145,14 +150,6 @@ class App extends PureComponent {
             </div>
         );
     }
-}
-
-App.propTypes = {
-    apiUrl: PropTypes.string
-}
-
-App.defaultProps = {
-    apiUrl: 'https://mass-follower1.herokuapp.com'
 }
 
 export default App;
