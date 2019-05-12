@@ -65,33 +65,28 @@ class App extends PureComponent {
                     <div className="col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body p-b-0 p-t-2 bg-primary">
-                                <h3 className="panel-title">
-                                    Twitter mass follower
-                                </h3>
-                                <p className="m-b-2">
-                                    The amount of followers on some Twitter accounts
-                                </p>
-                                <div className="btn-group">
-                                    <RunJobButton
-                                        className="m-b-3"
-                                        apiUrl={this.state.apiUrl}
-                                    />
-                                    <UpdateFollowersButton
-                                        apiUrl={this.state.apiUrl}
-                                    />
+                                <div className="row m-b-3">
+                                    <div className="col-xs-12">
+                                        <h3 className="panel-title">
+                                            Twitter mass follower
+                                        </h3>
+                                        <p className="m-b-0">
+                                            The amount of followers on some Twitter accounts
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="btn-group">
                                             <Button
-                                                text="Node 1"
+                                                text="Account 1"
                                                 loadingText="Loading..."
                                                 onClick={(e) => this.onSourceChange('https://mass-follower1.herokuapp.com')}
                                                 loading={false}
                                                 className={classnames({'active' : this.state.apiUrl === 'https://mass-follower1.herokuapp.com'})}
                                              />
                                              <Button
-                                                 text="Node 2"
+                                                 text="Account 2"
                                                  loadingText="Loading..."
                                                  onClick={(e) => this.onSourceChange('https://mass-follower.herokuapp.com')}
                                                  loading={false}
@@ -100,15 +95,31 @@ class App extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        disabled={true}
-                                        value={this.state.apiUrl}
-                                        onChange={this.onSourceChange}
-                                        className="form-control"
-                                        placeholder="API URL"
-                                    />
+                                <div className="row m-b-3">
+                                    <div className="col-xs-12">
+                                        <div className="form-group form-group-sm m-b-0">
+                                            <input
+                                                type="text"
+                                                disabled={true}
+                                                value={this.state.apiUrl}
+                                                onChange={this.onSourceChange}
+                                                className="form-control"
+                                                placeholder="API URL"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row m-b-3">
+                                    <div className="col-xs-12">
+                                        <div className="btn-group">
+                                            <RunJobButton
+                                                apiUrl={this.state.apiUrl}
+                                            />
+                                            <UpdateFollowersButton
+                                                apiUrl={this.state.apiUrl}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="panel-body">
