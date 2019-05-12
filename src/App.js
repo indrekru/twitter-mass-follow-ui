@@ -109,7 +109,7 @@ class App extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row m-b-3">
+                                {/* <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="btn-group">
                                             <RunJobButton
@@ -120,7 +120,7 @@ class App extends PureComponent {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="panel-body">
                                 {this.state.followers.length &&
