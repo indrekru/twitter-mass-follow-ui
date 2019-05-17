@@ -47,6 +47,12 @@ class App extends PureComponent {
                 apiUrl: url,
                 followers: this.transformData(data)
             });
+        })
+        .catch(() => {
+            this.setState({
+                loading: false
+            });
+            clearInterval(this.timer);
         });
     }
 
