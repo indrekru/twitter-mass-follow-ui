@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f6af5abd-2af7-444b-b6dd-e0a810d315cd/deploy-status)](https://app.netlify.com/sites/mass-follower/deploys)
 
-https://mass-follower.netlify.com/
+mass-follower.netlify.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
