@@ -106,6 +106,13 @@ class App extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="row m-b-3">
+                                    <div className="col-xs-12">
+                                        <h4>
+                                            <b>Following:</b> {this.state.followers.length > 0 ? this.state.followers[this.state.followers.length - 1].Following : 0}, <b>Followers:</b> {this.state.followers.length > 0 ? this.state.followers[this.state.followers.length - 1].Followers : 0}
+                                        </h4>
+                                    </div>
+                                </div>
                                 {/* <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <div className="form-group form-group-sm m-b-0">
