@@ -20,7 +20,8 @@ class App extends PureComponent {
             followers: [],
             updatingFollowers: false,
             apiUrl: this.accounts[0],
-            loading: false
+            loading: false,
+            latest : null
         };
 
         this.onSourceChange = this.onSourceChange.bind(this);
@@ -42,10 +43,12 @@ class App extends PureComponent {
             method: 'GET',
         }).then((resp) => resp.json())
         .then((data) => {
+            const followers = this.transformData(data);
             this.setState({
                 loading: false,
                 apiUrl: url,
-                followers: this.transformData(data)
+                followers: followers,
+                latest: followers[followers.length - 1]
             });
         })
         .catch(() => {
@@ -59,8 +62,13 @@ class App extends PureComponent {
     transformData(data) {
         let out = [];
         data.forEach((item) => {
+            const created = new Date(item.created);
+            const now = new Date();
+            let diff = Math.abs(now - created);
+            let minutesAgo = Math.floor((diff/1000)/60);
             out.push({
-                name: new Date(item.created).toLocaleString(),
+                name: created.toLocaleString(),
+                minutesAgo: minutesAgo,
                 Followers: item.myFollowers,
                 Following: item.imFollowing
             });
@@ -109,7 +117,9 @@ class App extends PureComponent {
                                 <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <h4>
-                                            <b>Following:</b> {this.state.followers.length > 0 ? this.state.followers[this.state.followers.length - 1].Following : 0}, <b>Followers:</b> {this.state.followers.length > 0 ? this.state.followers[this.state.followers.length - 1].Followers : 0}
+                                            <b>Following:</b> {this.state.latest ? this.state.latest.Following : 0}
+                                            , <b>Followers:</b> {this.state.latest ? this.state.latest.Followers : 0}
+                                            &nbsp;({this.state.latest ? this.state.latest.minutesAgo + ' minutes ago' : 0})
                                         </h4>
                                     </div>
                                 </div>
