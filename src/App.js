@@ -117,9 +117,9 @@ class App extends PureComponent {
                                 <div className="row m-b-3">
                                     <div className="col-xs-12">
                                         <h4>
-                                            <b>Following:</b> {this.state.latest ? this.state.latest.Following : 0}
-                                            , <b>Followers:</b> {this.state.latest ? this.state.latest.Followers : 0}
+                                            <b>Followers:</b> {this.state.latest ? this.state.latest.Followers : 0}
                                             &nbsp;({this.state.latest ? this.state.latest.minutesAgo + ' minutes ago' : 0})
+                                            &nbsp;<b>1 month growth:</b> {this.state.followers.length ? this.state.latest.Followers - this.state.followers[0].Followers : 0}
                                         </h4>
                                     </div>
                                 </div>
